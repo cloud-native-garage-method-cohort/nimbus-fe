@@ -1,6 +1,6 @@
 {
   "name": "nimbus-fe",
-  "version": "0.1.1-SNAPSHOT.0",
+  "version": "0.1.2-SNAPSHOT.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
