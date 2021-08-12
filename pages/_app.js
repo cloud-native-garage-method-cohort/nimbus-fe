@@ -92,7 +92,7 @@ export default function Home() {
                 >
                     Powered by{' '}
                     <span className={styles.logo}>
-            <Image src="/logo.png" alt="NextJS Logo" width={87} height={25}/>
+            <Image src="/logo.png" alt="NextJS Logo" width={30} height={30}/>
           </span>
                 </a>
             </footer>
