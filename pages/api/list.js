@@ -1,11 +1,16 @@
+// eslint-disable-next-line import/no-anonymous-default-export
 export default async (req, res) => {
-    const token = "REPLACE_YOUR_TOKEN";
-    const url = "https://REPLACE_YOUR_ENDPOINT/lrange/todo/0/100?_token=" + token;
+    
+    // const url = "https://6026780e186b4a0017780223.mockapi.io/api/v1/todo"
+    const url = process.env.API_URL
+
+    console.log("calling api todo...")
 
     return fetch(url)
         .then(r => r.json())
         .then(data => {
-            let result = JSON.stringify(data.result)
-            return res.status(200).json(result)
+            // let result = JSON.stringify(data.result)
+            console.log('api call data:', data)
+            return res.status(200).json(data)
         })
 }

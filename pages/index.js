@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 
 export default function Home() {
   
-    console.log('My Application Version', process.env.NEXT_PUBLIC_VERSION)
+    console.log('My Application Version:', process.env.NEXT_PUBLIC_VERSION)
     
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -80,8 +80,8 @@ export default function Home() {
                     }
 
                     {data.map((item) =>
-                        <a href="#" onClick={() => removeTodo(item)} key={item} className={styles.card}>
-                            <p>{item}</p>
+                        <a href="#" onClick={() => removeTodo(item.id)} key={item.id} className={styles.card}>
+                            <p>{item.todo}</p>
                         </a>)}
 
                 </div>

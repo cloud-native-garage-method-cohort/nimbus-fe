@@ -1,16 +1,25 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default async (req, res) => {
-    if(!req.query.todo) {
+    if (!req.query.todo) {
         return res.status(400).send("todo parameter required.")
     }
+
+    console.log('req.query.todo:',req.query.todo)
+
     let todo = encodeURI(req.query.todo)
 
-    const token = "REPLACE_YOUR_TOKEN";
-    const url = "https://REPLACE_YOUR_ENDPOINT/lpush/todo/" + todo + "?_token=" + token;
+    // const url = "https://6026780e186b4a0017780223.mockapi.io/api/v1/todo";
+    const url = process.env.API_URL
 
-    return fetch(url)
+    return fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({ todo }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
         .then(r => r.json())
         .then(data => {
-            let result = JSON.stringify(data.result)
-            return res.status(200).json(result)
+            return res.status(200).json(data)
         })
 }
