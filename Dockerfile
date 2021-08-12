@@ -1,22 +1,23 @@
-# Use node Docker image, version 16-alpine
-FROM quay.io/nhoomtham_aff/node-alpine
+FROM node:lts as dependencies
+WORKDIR /my-project
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 
-# From the documentation, "The WORKDIR instruction sets the working directory for any
-# RUN, CMD, ENTRYPOINT, COPY and ADD instructions that follow it in the Dockerfile"
-WORKDIR /usr/src/app
-
-# COPY package.json and package-lock.json into root of WORKDIR
-COPY package*.json ./
-
-# Executes commands
-RUN npm ci
-
-# Copies files from source to destination, in this case the root of the build context
-# into the root of the WORKDIR
+FROM node:lts as builder
+WORKDIR /my-project
 COPY . .
+COPY --from=dependencies /my-project/node_modules ./node_modules
+RUN yarn build
 
-# Document that this container exposes something on port 3000
+FROM node:lts as runner
+WORKDIR /my-project
+ENV NODE_ENV production
+# If you are using a custom next.config.js file, uncomment this line.
+# COPY --from=builder /my-project/next.config.js ./
+COPY --from=builder /my-project/public ./public
+COPY --from=builder /my-project/.next ./.next
+COPY --from=builder /my-project/node_modules ./node_modules
+COPY --from=builder /my-project/package.json ./package.json
+
 EXPOSE 3000
-
-# Command to use for starting the application
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
