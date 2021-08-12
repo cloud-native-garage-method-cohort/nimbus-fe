@@ -7,6 +7,8 @@ export default function Home() {
   
     console.log('My Application Version:', process.env.NEXT_PUBLIC_VERSION)
     
+    var decode = require('urldecode')
+
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [todo, setTodo] = useState("");
@@ -81,7 +83,7 @@ export default function Home() {
 
                     {data.map((item) =>
                         <a href="#" onClick={() => removeTodo(item.id)} key={item.id} className={styles.card}>
-                            <p>{item.todo}</p>
+                            <p>{decode(item.todo)}</p>
                         </a>)}
 
                 </div>
