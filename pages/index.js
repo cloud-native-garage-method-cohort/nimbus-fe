@@ -64,7 +64,11 @@ export default function Home() {
             <main className={styles.main}>
                 <div className={styles.grid}>
                     <h1 className={styles.title}>
-                        TODO App with Next.js!
+                        BOOTCAMP
+                        <br/>
+                        Cloud-Native-Garage-Method
+                        <br/>
+                        Squad-1 : TODO App
                         <br/>
                         <br/>
                     </h1>
