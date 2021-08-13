@@ -95,9 +95,9 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Thanks to {' '}
+                    Inspired from {' '}
                     <span className={styles.logo}>
-            <Image src="/logo.png" alt="next Logo" width={87} height={25}/>
+            <Image src="/logo.png" alt="next Logo" width={30} height={30}/>
           </span>
                 </a>
             </footer>

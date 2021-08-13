@@ -5,10 +5,11 @@ export default async (req, res) => {
     }
     let todoId = encodeURI(req.query.todo)
 
-    console.log("Removing todo.id:", todoId)
+    console.log("Removing... todo.id:", todoId)
 
-    // const url = "https://6026780e186b4a0017780223.mockapi.io/api/v1/todo" + "/" + todoId;
     const url = process.env.API_URL + "/" + todoId;
+
+    console.log("calling DELETE API: ", url)
 
     return fetch(url, {
         method: 'DELETE',
@@ -18,6 +19,7 @@ export default async (req, res) => {
     })
         .then(r => r.json())
         .then(data => {
+            console.log("response...", data)
             return res.status(200).json(data)
         })
 
